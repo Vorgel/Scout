@@ -23,7 +23,7 @@ namespace Scout.ViewModels
                 if ( _chosenDirectory != value)
                 {
                     _chosenDirectory = value;
-                    OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs("ChosenDirectory"));
+                    NotifyOfPropertyChange(() => ChosenDirectory);
                 }
             }
 

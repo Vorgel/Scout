@@ -24,7 +24,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="DirectoryLocationTextBox" Grid.Row="0"  Grid.Column="0"  Height="30" Width="300" PlaceholderText="Type directory location..." Text="{Binding ChosenDirectory, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="ChosenDirectory" Grid.Row="0"  Grid.Column="0"  Height="30" Width="300" PlaceholderText="Type directory location..." />
                 <Button x:Name="BrowseDirectoryButton" Grid.Row="0" Grid.Column="1"  Height="30" Width="65" HorizontalAlignment="Left" Content="Browse" Command="{Binding PickDirectoryCommand, Mode=OneWay}"/>
             </Grid>
 
