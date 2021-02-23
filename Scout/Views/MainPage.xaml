@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Custom="using:Scout.Views"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d"
     d:DesignHeight="600"
@@ -17,7 +17,8 @@
                 <RowDefinition Height="7*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
+            
+            <!-- Row 0 -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
@@ -25,36 +26,24 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox x:Name="ChosenDirectory" Grid.Row="0"  Grid.Column="0"  Height="30" Width="300" PlaceholderText="Type directory location..." />
-                <Button x:Name="BrowseDirectoryButton" Grid.Row="0" Grid.Column="1"  Height="30" Width="65" HorizontalAlignment="Left" Content="Browse" Command="{Binding PickDirectoryCommand, Mode=OneWay}"/>
+                <Button x:Name="PickDirectory" Grid.Row="0" Grid.Column="1"  Height="30" Width="65" HorizontalAlignment="Left" Content="Browse"/>
             </Grid>
+            
+            <!-- Row 1 -->
+            <Custom:OperationsView Grid.Row="1"/>
 
-            <ListView Grid.Row="1" Margin="10,10,10,10" >
-                <CheckBox Content="Get OS info"/>
-                <CheckBox Content="Get SQL Server info"/>
-                <CheckBox Content="Get .config files"/>
-                <CheckBox Content="Get .log files"/>
-                <CheckBox Content="Option 5"/>
-                <CheckBox Content="Option 6"/>
-                <CheckBox Content="Option 7"/>
-                <CheckBox Content="Option 8" />
-                <CheckBox Content="Option 9"/>
-                <CheckBox Content="Option 10"/>
-                <CheckBox Content="Option 11"/>
-                <CheckBox Content="Option 12"/>
-                <CheckBox Content="Option 13"/>
-                <CheckBox Content="Option 14"/>
-                <CheckBox Content="Option 15"/>
-                <CheckBox Content="Option 16"/>
-                <CheckBox Content="Option 17"/>
-            </ListView>
-
+            <!-- Row 2 -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="RunButton" Grid.Row="0" Grid.Column="1"  Height="30" Width="65" HorizontalAlignment="Center" Content="Run" Command="{Binding RunCommand, Mode=OneWay}"/>
+                <Button x:Name="Run"
+                        Grid.Row="0" Grid.Column="1"
+                        Height="30" Width="65"
+                        HorizontalAlignment="Center"
+                        Content="Run"/>
             </Grid>
         </Grid>
     </Grid>

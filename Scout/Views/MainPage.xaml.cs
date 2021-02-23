@@ -20,5 +20,10 @@ namespace Scout.Views
         {
             get { return DataContext as MainViewModel; }
         }
+
+        private void CheckBox_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+        }
     }
 }
