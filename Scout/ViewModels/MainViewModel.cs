@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Caliburn.Micro;
 using Scout.Operations;
 using Scout.Services;
 using Windows.Storage.Pickers;
+using Windows.UI.Popups;
 
 namespace Scout.ViewModels
 {
     public class MainViewModel : Screen
     {
+        // TODO: sprawdz autofaca w caliburn
+        // bo oeprations view model moze przyjmowac liste operacji
+
         private string _chosenDirectory = string.Empty;
 
         private OutputProvider outputProvider;
-        private OperationsViewModel operationsViewModel;
+        public OperationsViewModel OperationsViewModel { get; set; }
         private IEnumerable<IOperation> operations;
 
         public string ChosenDirectory
@@ -34,9 +39,9 @@ namespace Scout.ViewModels
             }
         }
 
-        public MainViewModel()
+        public MainViewModel(OperationsViewModel operationsViewModel)
         {
-            this.operationsViewModel = new OperationsViewModel();
+            this.OperationsViewModel = operationsViewModel ;
         }
 
         public bool CanRun(string chosenDirectory)
@@ -51,14 +56,25 @@ namespace Scout.ViewModels
             AutofacConfig autofacConfig = new AutofacConfig(this.outputProvider);
             this.operations = autofacConfig.GetContainer();
 
-            this.operationsViewModel.CreateCheckedOperationsArray();
+           var checkedOperationsNames = this.OperationsViewModel.GetCheckedOperationsNames();
 
             foreach (var operation in this.operations)
             {
-                Debug.WriteLine(operation.GetType()); 
-                Debug.WriteLine(operation.ToString());
-                operation.Run();
+                var operationName = GetOperationName(operation.ToString());
+
+                if (checkedOperationsNames.Contains(operationName))
+                {
+                    operation.Run();
+                }
             }
+
+            var dialog = new MessageDialog(string.Join(",",checkedOperationsNames));
+            await dialog.ShowAsync();
+        }
+
+        private string GetOperationName(string name)
+        {
+            return name.Split('.').Last();
         }
 
         public async void PickDirectory()

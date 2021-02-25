@@ -6,31 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Scout.ViewModels"
-    d:DataContext="{d:DesignInstance Type=vm:OperationsViewModel}"
     mc:Ignorable="d"
     Background="White"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
-    <Grid>
-        <ListView  Margin="10,10,10,10" >
-            <CheckBox x:Name="OSinfoCheckbox"  IsChecked="{Binding ElementName=OperationViewModel, Path=IsOSInfoOperationChecked}" Content="Get OS info" />
-            <CheckBox IsChecked="{Binding IsSQLServerInfoOperationChecked}" Content="Get SQL Server info"/>
-            <CheckBox IsChecked="{Binding IsConfigFilesOperationChecked}" Content="Get .config files"/>
-            <CheckBox IsChecked="True" Content="Get .log files"/>
-            <CheckBox IsChecked="True" Content="Option 5"/>
-            <CheckBox IsChecked="True" Content="Option 6"/>
-            <CheckBox IsChecked="True" Content="Option 7"/>
-            <CheckBox IsChecked="True" Content="Option 8" />
-            <CheckBox IsChecked="True" Content="Option 9"/>
-            <CheckBox IsChecked="True" Content="Option 10"/>
-            <CheckBox IsChecked="True" Content="Option 11"/>
-            <CheckBox IsChecked="True" Content="Option 12"/>
-            <CheckBox IsChecked="True" Content="Option 13"/>
-            <CheckBox IsChecked="True" Content="Option 14"/>
-            <CheckBox IsChecked="True" Content="Option 15"/>
-            <CheckBox IsChecked="True" Content="Option 16"/>
-            <CheckBox IsChecked="True" Content="Option 17"/>
-        </ListView>
-    </Grid>
+
+    <ListView ItemsSource="{Binding Operations}" Margin="10 10 10 10" >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>

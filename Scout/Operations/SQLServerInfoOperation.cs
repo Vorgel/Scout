@@ -11,9 +11,6 @@ namespace Scout.Operations
     {
         public async void Run()
         {
-            MessageDialog dialog = new MessageDialog("dupa3");
-
-            await dialog.ShowAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Scout.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,60 +13,43 @@ namespace Scout.ViewModels
 {
     public class OperationsViewModel : Screen
     {
-        private bool _isOSInfoOperationChecked;
+        private BindableCollection<OperationBinder> _operations = new BindableCollection<OperationBinder>();
 
-        public bool IsOSInfoOperationChecked
+        public BindableCollection<OperationBinder> Operations
         {
             get
             {
-                return _isOSInfoOperationChecked;
+                return _operations;
             }
-
             set
             {
-                if (_isOSInfoOperationChecked != value)
+                if (_operations != value)
                 {
-                     _isOSInfoOperationChecked = value;
-                    NotifyOfPropertyChange(() => IsOSInfoOperationChecked);
+                    _operations = value;
                 }
             }
         }
 
-        public bool IsSQLServerInfoOperationChecked { get; set; }
-
-        public bool IsConfigFilesOperationChecked { get; set; }
-
-        List<string> checkedOperations;
-
         public OperationsViewModel()
         {
+            this.Operations.Add(new OperationBinder("OSInfoOperation"));
+            this.Operations.Add(new OperationBinder("ConfigFilesOperation"));
+            this.Operations.Add(new OperationBinder("SQLServerInfoOperation"));
         }
 
-        public void  CreateCheckedOperationsArray()
+        public List<string> GetCheckedOperationsNames()
         {
             List<string> checkedOperations = new List<string>();
 
-            if (this.IsOSInfoOperationChecked && !checkedOperations.Contains("OSInfoOperation"))
+            foreach (var operation in this.Operations)
             {
-                checkedOperations.Add("OSInfoOperation");
+                if (operation.IsChecked && !checkedOperations.Contains(operation.Name))
+                {
+                    checkedOperations.Add(operation.Name);
+                }
             }
 
-            if (this.IsSQLServerInfoOperationChecked && !checkedOperations.Contains("SQLServerInfoOperation"))
-            {
-                checkedOperations.Add("SQLServerInfoOperation");
-            }
-
-            if (this.IsConfigFilesOperationChecked && !checkedOperations.Contains("ConfigFilesOperation"))
-            {
-                checkedOperations.Add("ConfigFilesOperation");
-            }
-
-            foreach (var operation in checkedOperations)
-            {
-                Debug.WriteLine(operation);
-            }
-
-            this.checkedOperations = checkedOperations;
+           return checkedOperations;
         }
     }
 }

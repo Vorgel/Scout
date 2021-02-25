@@ -29,6 +29,8 @@ namespace Scout.Services
             var builder = new ContainerBuilder();
             builder.RegisterInstance(this.outputProvider).As<OutputProvider>();
             builder.RegisterType<OSInfoOperation>().As<IOperation>();
+            builder.RegisterType<ConfigFilesOperation>().As<IOperation>();
+            builder.RegisterType<SQLServerInfoOperation>().As<IOperation>();
 
             return builder.Build();
         }
