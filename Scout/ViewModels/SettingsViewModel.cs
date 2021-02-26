@@ -1,11 +1,6 @@
-﻿using System;
-using System.Windows.Input;
-
-using Caliburn.Micro;
-
+﻿using Caliburn.Micro;
 using Scout.Helpers;
 using Scout.Services;
-
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 

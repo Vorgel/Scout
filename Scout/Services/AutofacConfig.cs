@@ -1,10 +1,6 @@
 ﻿using Autofac;
 using Scout.Operations;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scout.Services
 {
@@ -31,6 +27,7 @@ namespace Scout.Services
             builder.RegisterType<OSInfoOperation>().As<IOperation>();
             builder.RegisterType<ConfigFilesOperation>().As<IOperation>();
             builder.RegisterType<SQLServerInfoOperation>().As<IOperation>();
+            builder.RegisterType<LogFilesOperation>().As<IOperation>();
 
             return builder.Build();
         }

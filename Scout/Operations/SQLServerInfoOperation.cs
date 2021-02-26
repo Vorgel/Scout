@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Popups;
+﻿using System.Threading.Tasks;
 
 namespace Scout.Operations
 {
     class SQLServerInfoOperation : IOperation
     {
-        public async void Run()
+        private const string OutputFileName = "SQLServerInfoOperation.json";
+
+        public async Task Run()
         {
         }
     }

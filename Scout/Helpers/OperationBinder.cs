@@ -1,17 +1,14 @@
 ﻿using Caliburn.Micro;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Scout.Operations;
 
 namespace Scout.Helpers
 {
     public class OperationBinder : Screen
     {
         private bool _isChecked;
-        public string Name { get; set; }
+        public string OperationName { get; set; }
 
+        public string DisplayDefinition { get; set; }
         public bool IsChecked
         {
             get
@@ -29,9 +26,10 @@ namespace Scout.Helpers
             }
         }
 
-        public OperationBinder(string name)
+        public OperationBinder(string name, string displayDefinition)
         {
-            this.Name = name;
+            this.OperationName = name;
+            this.DisplayDefinition = displayDefinition;
         }
     }
 }

@@ -14,7 +14,7 @@
     <ListView ItemsSource="{Binding Operations}" Margin="10 10 10 10" >
         <ListView.ItemTemplate>
             <DataTemplate>
-                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding Name}"/>
+                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Content="{Binding DisplayDefinition}"/>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Micro;
 using Scout.Operations;
 using Scout.Services;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 
@@ -13,14 +13,13 @@ namespace Scout.ViewModels
 {
     public class MainViewModel : Screen
     {
-        // TODO: sprawdz autofaca w caliburn
-        // bo oeprations view model moze przyjmowac liste operacji
-
-        private string _chosenDirectory = string.Empty;
+        private string _chosenDirectory;
 
         private OutputProvider outputProvider;
         public OperationsViewModel OperationsViewModel { get; set; }
         private IEnumerable<IOperation> operations;
+
+        public StorageFolder ChosenDirectoryStorage { get; set; }
 
         public string ChosenDirectory
         {
@@ -51,7 +50,9 @@ namespace Scout.ViewModels
 
         public async void Run(string chosenDirectory)
         {
-            this.outputProvider = new OutputProvider();
+            this.outputProvider = new OutputProvider(this.ChosenDirectoryStorage);
+
+            await this.outputProvider.Setup();
 
             AutofacConfig autofacConfig = new AutofacConfig(this.outputProvider);
             this.operations = autofacConfig.GetContainer();
@@ -64,7 +65,7 @@ namespace Scout.ViewModels
 
                 if (checkedOperationsNames.Contains(operationName))
                 {
-                    operation.Run();
+                    await operation.Run();
                 }
             }
 
@@ -81,7 +82,9 @@ namespace Scout.ViewModels
         {
             FolderPicker folderPicker = new FolderPicker();
             folderPicker.FileTypeFilter.Add("*");
-            var path = await folderPicker.PickSingleFolderAsync();
+            StorageFolder path = await folderPicker.PickSingleFolderAsync();
+
+            this.ChosenDirectoryStorage = path;
 
             if (path != null)
             {

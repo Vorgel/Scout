@@ -1,9 +1,5 @@
-﻿using System;
-using Scout.ViewModels;
+﻿using Scout.ViewModels;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Popups;
-using Windows.Storage.Pickers;
-using Windows.Storage;
 
 namespace Scout.Views
 {

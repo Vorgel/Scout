@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Scout.Operations
 {
-    interface IOperation
+    public interface IOperation
     {
-        void Run();
+        Task Run();
     }
 }

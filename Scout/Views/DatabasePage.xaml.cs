@@ -1,7 +1,4 @@
-﻿using System;
-
-using Scout.ViewModels;
-
+﻿using Scout.ViewModels;
 using Windows.UI.Xaml.Controls;
 
 namespace Scout.Views
