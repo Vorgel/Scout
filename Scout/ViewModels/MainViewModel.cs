@@ -69,7 +69,7 @@ namespace Scout.ViewModels
                 }
             }
 
-            var dialog = new MessageDialog(string.Join(",",checkedOperationsNames));
+            var dialog = new MessageDialog("File " + outputProvider.OutputDirectory + " created.");
             await dialog.ShowAsync();
         }
 

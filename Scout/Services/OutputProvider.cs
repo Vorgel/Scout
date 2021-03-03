@@ -16,7 +16,7 @@ namespace Scout.Services
         public string OutputDirectory { get; private set; }
         public StorageFolder SearchedDirectory { get; set; }
 
-        private StorageFolder folder;
+        public StorageFolder folder;
 
         public OutputProvider(StorageFolder  searchedDirectory)
         {
@@ -74,8 +74,10 @@ namespace Scout.Services
         {
             try
             {
-                List<string> fileTypeFilter = new List<string>();
-                fileTypeFilter.Add(searchKey);
+                List<string> fileTypeFilter = new List<string>
+                {
+                    searchKey
+                };
 
                 QueryOptions queryOptions = new QueryOptions(CommonFileQuery.OrderByName, fileTypeFilter);
 

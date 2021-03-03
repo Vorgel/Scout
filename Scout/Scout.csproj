@@ -147,11 +147,15 @@
     <Compile Include="Helpers\NavHelper.cs" />
     <Compile Include="Helpers\OperationBinder.cs" />
     <Compile Include="Helpers\RegistryRead.cs" />
+    <Compile Include="Helpers\RegistryReader.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
+    <Compile Include="Operations\AccessDatabasesOperation.cs" />
     <Compile Include="Operations\ConfigFilesOperation.cs" />
+    <Compile Include="Operations\JavaInfoOperation.cs" />
+    <Compile Include="Operations\PythonInfoOperation.cs" />
     <Compile Include="Operations\LogFilesOperation.cs" />
     <Compile Include="Operations\OSInfoOperation.cs" />
-    <Compile Include="Operations\SQLServerInfoOperation.cs" />
+    <Compile Include="Operations\PowershellInfoOperation.cs" />
     <Compile Include="Operations\IOperation.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
@@ -298,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -311,8 +316,22 @@
       <Name>Scout.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.17763.0">
+      <Name>Windows Desktop Extensions for the UWP %28WindowsDesktop, Version=10.0.17763.0%29</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsDesktop, Version=10.0.18362.0">
+      <Name>Windows Desktop Extensions for the UWP %28WindowsDesktop, Version=10.0.18362.0%29</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsDesktop, Version=10.0.19041.0">
+      <Name>Windows Desktop Extensions for the UWP %28WindowsDesktop, Version=10.0.19041.0%29</Name>
+    </SDKReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

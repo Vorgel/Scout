@@ -26,8 +26,11 @@ namespace Scout.Services
             builder.RegisterInstance(this.outputProvider).As<OutputProvider>();
             builder.RegisterType<OSInfoOperation>().As<IOperation>();
             builder.RegisterType<ConfigFilesOperation>().As<IOperation>();
-            builder.RegisterType<SQLServerInfoOperation>().As<IOperation>();
             builder.RegisterType<LogFilesOperation>().As<IOperation>();
+            builder.RegisterType<PowershellInfoOperation>().As<IOperation>();
+            builder.RegisterType<PythonInfoOperation>().As<IOperation>();
+            builder.RegisterType<JavaInfoOperation>().As<IOperation>();
+            builder.RegisterType<AccessDatabasesOperation>().As<IOperation>();
 
             return builder.Build();
         }

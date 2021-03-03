@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="ChosenDirectory" Grid.Row="0"  Grid.Column="0"  Height="30" Width="300" PlaceholderText="Type directory location..." />
+                <TextBox x:Name="ChosenDirectory" Grid.Row="0"  Grid.Column="0"  Height="30" Width="300" PlaceholderText="Type search location..." />
                 <Button x:Name="PickDirectory" Grid.Row="0" Grid.Column="1"  Height="30" Width="65" HorizontalAlignment="Left" Content="Browse"/>
             </Grid>
             

@@ -13,18 +13,6 @@ namespace Scout.Operations
         private const string OutputFileName = "OSInfoOperation.json";
 
         private readonly OutputProvider outputProvider;
-        private readonly List<string> keyNames = new List<string>
-        {
-            "ProductName",
-            "EditionID",
-            "PathName",
-            "CurrentVersion",
-            "ReleaseId",
-            "BuildBranch",
-            "BuildLabEx",
-            "BuildLab",
-            "InstallationType",
-        };
 
         public OSInfoOperation(OutputProvider outputProvider)
         {
@@ -37,7 +25,7 @@ namespace Scout.Operations
             {
                 string registryKey = @"SOFTWARE\Microsoft\Windows NT\CurrentVersion";
 
-                List<RegistryRead> registries = RegistryReader.ReadRegistries(registryKey, this.keyNames);
+                List<RegistryRead> registries = RegistryReader.ReadRegistries(registryKey);
 
                 if (registries != null)
                 {

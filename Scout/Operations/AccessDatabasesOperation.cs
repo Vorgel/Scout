@@ -1,22 +1,19 @@
-﻿using Scout.Helpers;
-using Scout.Services;
-using System;
-using System.IO;
+﻿using Scout.Services;
 using System.Threading.Tasks;
 
 namespace Scout.Operations
 {
-    public class ConfigFilesOperation : IOperation
+    public class AccessDatabasesOperation : IOperation
     {
         private readonly OutputProvider outputProvider;
 
-        public ConfigFilesOperation(OutputProvider outputProvider)
+        public AccessDatabasesOperation(OutputProvider outputProvider)
         {
             this.outputProvider = outputProvider;
         }
         public async Task Run()
         {
-            await outputProvider.GetAppFiles(".config");
+            await outputProvider.GetAppFiles(".el");
         }
     }
 }
