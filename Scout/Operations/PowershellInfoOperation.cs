@@ -1,7 +1,6 @@
 ﻿using Scout.Helpers;
 using Scout.Services;
 using System;
-using System.Collections.Generic;
 using System.Security;
 using System.Threading.Tasks;
 

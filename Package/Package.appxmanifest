@@ -45,6 +45,7 @@
           <desktop:FullTrustProcess>
             <desktop:ParameterGroup GroupId="JavaInfoOperation" Parameters="/javaInfoOperation" />
             <desktop:ParameterGroup GroupId="PythonInfoOperation" Parameters="/pythonInfoOperation" />
+            <desktop:ParameterGroup GroupId="ZipFiles" Parameters="/zipFiles" />
           </desktop:FullTrustProcess>
         </desktop:Extension>
       </Extensions>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Caliburn.Micro;
 using Scout.Operations;
 using Scout.Services;
@@ -69,8 +68,11 @@ namespace Scout.ViewModels
                 }
             }
 
-            var dialog = new MessageDialog("File " + outputProvider.OutputDirectory + " created.");
-            await dialog.ShowAsync();
+            await this.outputProvider.CreateZipFile();
+            await this.outputProvider.DeleteTemporaryDirectory();
+
+            MessageDialog messageDialog = new MessageDialog("Zip file created.");
+            await messageDialog.ShowAsync();
         }
 
         private string GetOperationName(string name)

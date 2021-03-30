@@ -1,20 +1,13 @@
 ﻿using Caliburn.Micro;
 using Scout.Helpers;
-using Scout.Operations;
 using System.Collections.Generic;
 
 /*TODO:
  * - Serilog
- * - determine SQL Server version in SQLServerInfoOperation
- *  - powershellinfo
- *  - installed java
- *  - instaleld python
- *  
  * - find out other operation ideas 
  * - introduce custom save place
  * - introduce databaseverifier
  */
-
 
 namespace Scout.ViewModels
 {

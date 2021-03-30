@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using Windows.Storage;
 
 namespace Launcher
@@ -26,9 +27,22 @@ namespace Launcher
                         GetJavaVersion();
                         break;
                     }
+
+                    case "/zipFiles":
+                    {
+                        ZipFiles();
+                        break;
+                    }
                 }
             }
          }
+        private static void ZipFiles()
+        {
+            var directoryToZip = ApplicationData.Current.LocalSettings.Values["outputPath"] as string;
+            string zipPath = directoryToZip + ".zip";
+
+            ZipFile.CreateFromDirectory(directoryToZip, zipPath,CompressionLevel.Optimal, false);
+        }
 
         private static void GetJavaVersion()
         {

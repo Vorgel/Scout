@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using Scout.Operations;
 
 namespace Scout.Helpers
 {

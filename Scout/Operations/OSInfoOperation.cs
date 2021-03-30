@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using Scout.Helpers;
+﻿using Scout.Helpers;
 using Scout.Services;
 using System;
 using System.Collections.Generic;

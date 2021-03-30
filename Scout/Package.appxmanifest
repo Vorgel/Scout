@@ -48,8 +48,8 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient"/>
     <rescap:Capability Name="broadFileSystemAccess" />
+    <Capability Name="internetClient"/>
   </Capabilities>
 
   <genTemplate:Metadata>

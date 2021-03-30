@@ -1,9 +1,6 @@
-﻿using Scout.Helpers;
-using Scout.Services;
+﻿using Scout.Services;
 using System;
-using System.Diagnostics;
 using System.IO;
-using System.Security;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Foundation.Metadata;

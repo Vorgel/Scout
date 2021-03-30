@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization;
+using System.Security;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Windows.ApplicationModel;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
-using Windows.Storage.Pickers;
 using Windows.Storage.Search;
 
 namespace Scout.Services
@@ -18,7 +19,7 @@ namespace Scout.Services
 
         public StorageFolder folder;
 
-        public OutputProvider(StorageFolder  searchedDirectory)
+        public OutputProvider(StorageFolder searchedDirectory)
         {
             this.SearchedDirectory = searchedDirectory;
         }
@@ -26,10 +27,10 @@ namespace Scout.Services
         public async Task Setup()
         {
             this.SetDirectoryName();
-            await CreateDirectory();
+            await CreateTemporaryDirectory();
         }
 
-        public async Task CreateDirectory()
+        public async Task CreateTemporaryDirectory()
         {
             if (!Directory.Exists(this.OutputDirectory))
             {
@@ -45,6 +46,36 @@ namespace Scout.Services
                     Console.WriteLine(e.Message);
                     throw;
                 }
+            }
+        }
+
+        public async Task DeleteTemporaryDirectory()
+        {
+            try
+            {
+                await folder.DeleteAsync();
+            }
+            catch (Exception e) when (e is UnauthorizedAccessException || e is PathTooLongException || e is DirectoryNotFoundException)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
+        public async Task CreateZipFile()
+        {
+            try
+            {
+                if (ApiInformation.IsApiContractPresent("Windows.ApplicationModel.FullTrustAppContract", 1, 0))
+                {
+                    ApplicationData.Current.LocalSettings.Values["outputPath"] = folder.Path;
+
+                    await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("ZipFiles");
+                }
+            }
+            catch (Exception e) when (e is SecurityException || e is IOException || e is UnauthorizedAccessException)
+            {
+                throw;
             }
         }
 

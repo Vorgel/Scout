@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
 using Caliburn.Micro;
-
-using Scout.Helpers;
 using Windows.UI.Popups;
 
 namespace Scout.ViewModels
