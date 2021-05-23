@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Security;
 using System.Threading.Tasks;
@@ -37,7 +36,6 @@ namespace Scout.Services
                 try
                 {
                     StorageFolder newfolder = await DownloadsFolder.CreateFolderAsync(this.OutputDirectory, CreationCollisionOption.GenerateUniqueName);
-                    Debug.WriteLine("folder created");
 
                     this.folder = newfolder;
                 }
@@ -58,6 +56,24 @@ namespace Scout.Services
             catch (Exception e) when (e is UnauthorizedAccessException || e is PathTooLongException || e is DirectoryNotFoundException)
             {
                 Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
+        public async Task CreateSecuredZipFile(string password)
+        {
+            try
+            {
+                if (ApiInformation.IsApiContractPresent("Windows.ApplicationModel.FullTrustAppContract", 1, 0))
+                {
+                    ApplicationData.Current.LocalSettings.Values["outputPath"] = folder.Path;
+                    ApplicationData.Current.LocalSettings.Values["zipPassword"] = password;
+
+                    await FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync("PasswordZipFiles");
+                }
+            }
+            catch (Exception e) when (e is SecurityException || e is IOException || e is UnauthorizedAccessException)
+            {
                 throw;
             }
         }

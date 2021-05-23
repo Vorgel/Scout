@@ -9,6 +9,14 @@
     mc:Ignorable="d"
     d:DesignHeight="600"
     d:DesignWidth="500">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/PasswordBoxResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
         <Grid
@@ -40,6 +48,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <PasswordBox x:Name="ZipPassword"
+                        Grid.Row="0" Grid.Column="0"
+                        PlaceholderText="Zip password (optional)"
+                        Width="200"
+                        Height="30"
+                        Margin="10"
+                        HorizontalAlignment="Left" />
+                
                 <Button x:Name="Run"
                         Grid.Row="0" Grid.Column="1"
                         Height="30" Width="65"

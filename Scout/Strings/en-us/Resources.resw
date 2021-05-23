@@ -157,6 +157,9 @@
   <data name="Settings_PrivacyTermsLink.NavigateUri" xml:space="preserve">  
     <value>https://github.com/Vorgel/Scout</value>
   </data>
+  <data name="Author_name.Text" xml:space="preserve">    
+    <value>Author: Konrad Lempart</value>
+  </data>
   <data name="Settings_Personalization.Text" xml:space="preserve">   
     <value>Personalization</value>
   </data>

@@ -52,7 +52,7 @@
   <PropertyGroup>
     <ProjectGuid>3e8f1a65-9c56-4ff0-b850-18131850dcfb</ProjectGuid>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\Scout\Scout.csproj</EntryPointProjectUniqueName>

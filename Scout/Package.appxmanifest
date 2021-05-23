@@ -50,6 +50,10 @@
   <Capabilities>
     <rescap:Capability Name="broadFileSystemAccess" />
     <Capability Name="internetClient"/>
+    <Capability Name="internetClientServer"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <uap:Capability Name="enterpriseAuthentication"/>
+    <uap:Capability Name="phoneCall"/>
   </Capabilities>
 
   <genTemplate:Metadata>

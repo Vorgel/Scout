@@ -15,8 +15,9 @@ namespace Scout.ViewModels
         private string _chosenDirectory;
 
         private OutputProvider outputProvider;
-        public OperationsViewModel OperationsViewModel { get; set; }
         private IEnumerable<IOperation> operations;
+        public OperationsViewModel OperationsViewModel { get; set; }
+        public string ZipPassword { get; set; }
 
         public StorageFolder ChosenDirectoryStorage { get; set; }
 
@@ -68,8 +69,14 @@ namespace Scout.ViewModels
                 }
             }
 
-            await this.outputProvider.CreateZipFile();
-            await this.outputProvider.DeleteTemporaryDirectory();
+            if (!String.IsNullOrEmpty(this.ZipPassword))
+            {
+                await this.outputProvider.CreateSecuredZipFile(this.ZipPassword);
+            }
+            else
+            {
+                await this.outputProvider.CreateZipFile();
+            }
 
             MessageDialog messageDialog = new MessageDialog("Zip file created.");
             await messageDialog.ShowAsync();

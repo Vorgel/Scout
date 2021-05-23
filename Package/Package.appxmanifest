@@ -44,8 +44,11 @@
         <desktop:Extension Category="windows.fullTrustProcess" Executable="Launcher\Launcher.exe">
           <desktop:FullTrustProcess>
             <desktop:ParameterGroup GroupId="JavaInfoOperation" Parameters="/javaInfoOperation" />
+            <desktop:ParameterGroup GroupId="CanConnect" Parameters="/canConnect" />
+            <desktop:ParameterGroup GroupId="IsTheOnlyConnection" Parameters="/isTheOnlyConnection" />
             <desktop:ParameterGroup GroupId="PythonInfoOperation" Parameters="/pythonInfoOperation" />
             <desktop:ParameterGroup GroupId="ZipFiles" Parameters="/zipFiles" />
+            <desktop:ParameterGroup GroupId="PasswordZipFiles" Parameters="/passwordZipFiles" />
           </desktop:FullTrustProcess>
         </desktop:Extension>
       </Extensions>
@@ -56,5 +59,8 @@
     <rescap:Capability Name="runFullTrust"/>
     <Capability Name="internetClient" />
     <uap:Capability Name="phoneCall"/>
+    <uap:Capability Name="enterpriseAuthentication"/>
+    <Capability Name="internetClientServer"/>
+    <Capability Name="privateNetworkClientServer"/>
   </Capabilities>
 </Package>

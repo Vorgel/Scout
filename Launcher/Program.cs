@@ -1,8 +1,20 @@
-﻿using System;
+﻿using Ionic.Zip;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
+using System.Security.Cryptography;
+using System.Text;
+using System.Web.Security;
 using Windows.Storage;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Generators;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.OpenSsl;
+using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
 
 namespace Launcher
 {
@@ -10,8 +22,6 @@ namespace Launcher
     {
         static void Main(string[] args)
         {
-            // parameters: command, outputPath
-
             if (args.Length > 2)
             {
                 switch (args[2])
@@ -33,15 +43,70 @@ namespace Launcher
                         ZipFiles();
                         break;
                     }
+
+                    case "/passwordZipFiles":
+                    {
+                        ZipFilesWithPassword();
+                        break;
+                    }
+
+                    case "/canConnect":
+                    {
+                        CanEstablishConnection();
+                        break;
+                    }
+
+                    case "/isTheOnlyConnection":
+                    {
+                        IsTheOnlyConnection();
+                        break;
+                    }
+
                 }
             }
          }
+
         private static void ZipFiles()
         {
-            var directoryToZip = ApplicationData.Current.LocalSettings.Values["outputPath"] as string;
-            string zipPath = directoryToZip + ".zip";
+            try
+            {
+                var directoryToZip = ApplicationData.Current.LocalSettings.Values["outputPath"] as string;
 
-            ZipFile.CreateFromDirectory(directoryToZip, zipPath,CompressionLevel.Optimal, false);
+                string zipPath = directoryToZip + ".zip";
+
+                using (ZipFile zip = new ZipFile())
+                {
+                    zip.AddDirectory(directoryToZip);
+                    zip.Save(zipPath);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        private static void ZipFilesWithPassword()
+        {
+            try
+            {
+                var password = ApplicationData.Current.LocalSettings.Values["zipPassword"] as string;
+
+                var directoryToZip = ApplicationData.Current.LocalSettings.Values["outputPath"] as string;
+
+                string zipPath = directoryToZip + ".zip";
+
+                using (ZipFile zip = new ZipFile())
+                {
+                    zip.Password = password;
+                    zip.AddDirectory(directoryToZip);
+                    zip.Save(zipPath);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         private static void GetJavaVersion()
@@ -64,6 +129,91 @@ namespace Launcher
             {
                 Console.WriteLine("Exception is " + ex.Message);
                 throw;
+            }
+        }
+
+        private static void IsTheOnlyConnection()
+        {
+            var connectionString = ApplicationData.Current.LocalSettings.Values["connectionString"] as string;
+
+            try
+            {
+                int dbID = GetDbID(connectionString);
+
+                string message = string.Empty;
+
+                if (dbID < 0)
+                {
+                    message = "false";
+                }
+
+                string getExistingDbConnections = $"SELECT COUNT(*) FROM sys.sysprocesses WHERE dbid='{dbID}' AND (status='runnable' OR status='sleeping' OR status='running' OR status='suspended')";
+
+                int rows = (int)GetSqlQueryResult(getExistingDbConnections, connectionString);
+
+                message = rows == 1 ? "true" : "false";
+
+                ApplicationData.Current.LocalSettings.Values["isTheOnlyConnection"] = message;
+            }
+            catch (SqlException e)
+            {
+                ApplicationData.Current.LocalSettings.Values["isTheOnlyConnection"] = e.Message;
+            }
+        }
+
+        private static object GetSqlQueryResult(string queryString, string connectionString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        return reader[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private static int GetDbID(string connectionString)
+        {
+            var databaseID = GetSqlQueryResult("SELECT DB_ID() AS [Database ID]", connectionString);
+
+            return databaseID == null ? -1 : Int32.Parse(databaseID.ToString());
+        }
+
+        private static void CanEstablishConnection()
+        {
+            var connectionString = ApplicationData.Current.LocalSettings.Values["connectionString"] as string;
+            var message = string.Empty;
+
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        message = "true";
+                    }
+                    else
+                    {
+                        message = "false";
+                    }    
+
+                    ApplicationData.Current.LocalSettings.Values["canConnect"] = message;
+                }
+            }
+            catch (SqlException e)
+            {
+                ApplicationData.Current.LocalSettings.Values["canConnect"] = e.Message;
             }
         }
 
