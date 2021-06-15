@@ -1,3 +1,3 @@
-# TODO
+# Scout
 
-IT support application to gather information about customer's system and simply test SQL Server database connection
+UWP app to gather information from user's system and simply test SQL Server database connection
