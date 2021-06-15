@@ -4,17 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web.Security;
 using Windows.Storage;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Generators;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Crypto.Encodings;
-using Org.BouncyCastle.Crypto.Engines;
 
 namespace Launcher
 {
