@@ -1,6 +1,6 @@
 # Scout
 
-UWP app to gather information from user's system and simply test SQL Server database connection
+UWP app to gather information from user's system and test SQL Server database connection
 
 Fetched system info:
 - Java version
