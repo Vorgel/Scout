@@ -14,3 +14,5 @@ Scout also lets you copy .log, .el and .config files from chosen location.
 All the gathered files are zipped with optional password typed by the user.
 
 Scout also has a possibility to test SQL Server database connection and check for other active database connections.
+
+It was actually my engineering thesis (i defended it).
